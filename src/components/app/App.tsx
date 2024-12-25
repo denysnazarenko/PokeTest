@@ -1,11 +1,21 @@
-import React from 'react';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "../pages/HomePage.tsx";
+import FavoritesPage from "../pages/FavoritesPage.tsx";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="flex items-center justify-center h-screen bg-blue-500">
-      <h1 className="text-white text-4xl font-bold">Hello, Tailwind + TS!</h1>
+    <div className="app">
+      <HomePage />
+      <FavoritesPage />
     </div>
+    // <Router>
+    //   <Routes>
+    //     {/* <Route path="/" element={<HomePage />} /> */}
+    //     {/* <Route path="/favorites" element={<FavoritesPage />} /> */}
+    //   </Routes>
+    // </Router>
   );
-}
+};
 
 export default App;
