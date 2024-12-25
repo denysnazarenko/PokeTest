@@ -9,9 +9,9 @@ interface FavoritesPageProps {
 }
 
 const FavoritesPage: React.FC<FavoritesPageProps> = () => {
-  const [favorites] = useLocalStorage<number[]>("favorites", []);
+  const [favorites, setFavorites] = useLocalStorage<number[]>("favorites", []);
   const [favoritePokemons, setFavoritePokemons] = useState<Pokemon[]>([]);
-  
+
   const fetchPokemonsByIds = async (ids: number[]) => {
     const pokemonPromises = ids.map(id => fetchPokemonById(id));
     const pokemons = await Promise.all(pokemonPromises);
@@ -21,16 +21,26 @@ const FavoritesPage: React.FC<FavoritesPageProps> = () => {
   useEffect(() => {
     if (favorites.length > 0) {
       fetchPokemonsByIds(favorites);
+    } else {
+      setFavoritePokemons([]);
     }
   }, [favorites]);
 
+  const toggleFavorite = (id: number) => {
+    setFavorites(
+      favorites.includes(id)
+        ? favorites.filter((favId) => favId !== id)
+        : [...favorites, id]
+    );
+  };
+
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-center mt-6">Улюблені покемони</h1>
+    <div className="container lg mx-auto">
+      <h1 className="text-3xl font-bold text-center mt-6 mb-5">Улюблені покемони</h1>
       <PokemonList
         pokemons={favoritePokemons}
         favorites={favorites}
-        toggleFavorite={() => { }}
+        toggleFavorite={toggleFavorite}
       />
     </div>
   );

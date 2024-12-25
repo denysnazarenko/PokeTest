@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="container lg mx-auto">
-      <h1 className="text-center text-5xl mt-6 mb-9" >Список покемонів</h1>
+      <h1 className="text-3xl font-bold text-center mt-6 mb-5" >Список покемонів</h1>
       <PokemonList
         pokemons={pokemons}
         favorites={favorites}
